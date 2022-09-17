@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
 
+#this dict is to do a dynamic path to each month
 monthly_challenges = {
     "january": "Read  at least 10 pages of a book for day",
     "february": "wake up at 5:30 every day except the weekends",
@@ -19,7 +21,8 @@ monthly_challenges = {
     "december": "do a voluntary work"
 }
 
-
+#this function test if the month is valid, using the string. Also
+#it works with the dict created up here
 def month_challenges(request, month):
     text = None
     try:
@@ -29,7 +32,8 @@ def month_challenges(request, month):
         return HttpResponseNotFound("Invalid month")
 
 
-
+#this fuunction is to show the right month with a number.
+#Also redirect the request
 def month_challenges_by_number(request, month):
     months = list(monthly_challenges.keys())
 
@@ -37,4 +41,5 @@ def month_challenges_by_number(request, month):
         return HttpResponseNotFound("Invalid month")
     
     redirect_month = months[month - 1]
-    return HttpResponseRedirect("/challenges/" + redirect_month)
+    redirect_path = reverse("month-challenge" , args = [redirect_month])
+    return HttpResponseRedirect(redirect_path)
