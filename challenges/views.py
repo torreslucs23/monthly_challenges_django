@@ -27,9 +27,10 @@ def month_challenges(request, month):
     text = None
     try:
         text = monthly_challenges[month]
+        text = f"<h1>{text}</h1>"
         return HttpResponse(text)
     except:
-        return HttpResponseNotFound("Invalid month")
+        return HttpResponseNotFound("<h1>Invalid month</h1>")
 
 
 #this fuunction is to show the right month with a number.
