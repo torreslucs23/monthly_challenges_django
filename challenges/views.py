@@ -21,6 +21,20 @@ monthly_challenges = {
     "december": "do a voluntary work"
 }
 
+def index(request):
+    list_items = ""
+    months = list(monthly_challenges.keys())
+
+    for month in months:
+        #capitalize the month's string
+        capitalized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        #we print all the months links
+        list_items += f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
+
 #this function test if the month is valid, using the string. Also
 #it works with the dict created up here
 def month_challenges(request, month):
