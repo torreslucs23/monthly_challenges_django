@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 
+
 # Create your views here.
 
 #this dict is to do a dynamic path to each month
@@ -38,11 +39,15 @@ def index(request):
 #this function test if the month is valid, using the string. Also
 #it works with the dict created up here
 def month_challenges(request, month):
-    text = None
+    text_response = None
+    title = month + "'s challenge"
     try:
-        text = monthly_challenges[month]
-        text = f"<h1>{text}</h1>"
-        return HttpResponse(text)
+        text_response = monthly_challenges[month]
+        return render(request, "challenges/challenge.html", {
+            "text": text_response,
+            "month": month,
+            "title": title})
+        
     except:
         return HttpResponseNotFound("<h1>Invalid month</h1>")
 
