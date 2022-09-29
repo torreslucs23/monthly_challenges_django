@@ -18,7 +18,7 @@ monthly_challenges = {
     "august": "start learn italian",
     "september": "eat no meat for the entire month",
     "october": "do not drink soda for the entire month",
-    "november": "start learn about deep learning",
+    "november": None,
     "december": "do a voluntary work"
 }
 
